@@ -46,7 +46,6 @@
       <thead><tr><th>Actividad</th><th>Nota</th><th>%</th><th>Acumulado</th></tr></thead><tbody id="filas"></tbody>
     </table>
     <div class="definitiva"><span>Definitiva</span><span id="definitiva" class="nota-final"></span></div>
-    <p id="retroalimentacion" style="margin:18px 0 0;text-align:center;font-weight:700"></p>
   </section>
 </main>
 <script>
@@ -54,38 +53,39 @@
 const CONFIG={
   titulo:"Socialización de Notas",
   periodo:"Período 2026-II",
-  asignatura:"Algoritmos y Programación",
+  asignatura:"Algoritmo y Programación",
   programa:"Ingeniería Civil",
   codigoPrograma:"IC",
   docente:"Julio Ricardo Martínez Montezuma",
   logo:"https://campusvirtual.unicomfacauca.edu.co/pluginfile.php/46925/course/overviewfiles/CURVAS-Logo-acreditacio%CC%81n-institucional-2022-01-2.png",
   actividades:[
-    {nombre:"Parcial C1S5",porcentaje:90}
+    {nombre:"Taller C1S2",porcentaje:10},
+    {nombre:"Taller C1S5",porcentaje:80}
   ]
 };
 /* Formato por estudiante: "documento": {nombre, notas, acumulados, asistencia, definitiva}. */
 const ESTUDIANTES={
-  "1150185516":{nombre:"CASTILLO ORDOÑEZ DAVID ALEJANDRO",notas:[3.3],acumulados:[2.97],asistencia:0.4,definitiva:3.4,observacion:"pdfs/04_David_Alejandro_Castillo_Juan_Diego_Munoz.pdf"},
-  "1081277513":{nombre:"CLAVIJO REYES SANTIAGO ANDRES",notas:[3.4],acumulados:[3.06],asistencia:0.4,definitiva:3.5,observacion:"pdfs/07_Santiago_Andres_Clavijo_Reyes_Diego_Alejandro_Rosero_Trochez.pdf"},
-  "1085660280":{nombre:"DURAN RODRIGUEZ JHONIER ALFREDO",notas:[2.0],acumulados:[1.80],asistencia:0.1,definitiva:1.9,observacion:"pdfs/06_Individual_DURAN_RODRIGUEZ_JHONIER_ALFREDO.pdf"},
-  "1061686954":{nombre:"GOMEZ RUIZ WILSON ALEJANDRO",notas:[3.1],acumulados:[2.79],asistencia:0.4,definitiva:3.2,observacion:"pdfs/08_Wilson_Gomez_Javier_Toledo.pdf"},
-  "1060870506":{nombre:"GUAMPE LLANTEN JULIAN DAVID",notas:[2.7],acumulados:[2.43],asistencia:0.4,definitiva:2.8,observacion:"pdfs/01_Adrian_Santiago_Raigoza_Julian_David_Guampe.pdf"},
-  "1058549207":{nombre:"MASABUEL VALENCIA DANIEL ANDRES",notas:[2.2],acumulados:[1.98],asistencia:0.5,definitiva:2.5,observacion:"pdfs/03_Daniel_Andres_Masamuel_Johan_Sebastian_Yotengo.pdf"},
-  "1029602345":{nombre:"MONTENEGRO ACHINTE JINETH CAROLINA",notas:[2.4],acumulados:[2.16],asistencia:0.4,definitiva:2.6,observacion:"pdfs/02_Yersi_Illiana_Sanchez_Pacue_Carolina_Montenegro_Achinte.pdf"},
-  "1059474502":{nombre:"MUNOZ JIMENEZ JUAN DIEGO",notas:[3.3],acumulados:[2.97],asistencia:0.2,definitiva:3.2,observacion:"pdfs/04_David_Alejandro_Castillo_Juan_Diego_Munoz.pdf"},
-  "1063434525":{nombre:"ORDOÑEZ ANACONA MAIKOL GABRIEL",notas:[1.0],acumulados:[0.90],asistencia:0.3,definitiva:1.2,observacion:""},
-  "1062078697":{nombre:"OSSA ROGER ALEXIS",notas:[1.0],acumulados:[0.90],asistencia:0.1,definitiva:1.0,observacion:""},
-  "1058933403":{nombre:"POLO MOLINA GERMAN ESTEBAN",notas:[3.2],acumulados:[2.88],asistencia:0.5,definitiva:3.4,observacion:"pdfs/05_Germain_Polo_Alan_Yatacue.pdf"},
-  "1025530060":{nombre:"RAIGOSA PIÑEROS ADRIAN SANTIAGO",notas:[2.7],acumulados:[2.43],asistencia:0.3,definitiva:2.7,observacion:"pdfs/01_Adrian_Santiago_Raigoza_Julian_David_Guampe.pdf"},
-  "1061710558":{nombre:"ROSERO TROCHEZ DIEGO ALEJANDRO",notas:[3.4],acumulados:[3.06],asistencia:0.4,definitiva:3.5,observacion:"pdfs/07_Santiago_Andres_Clavijo_Reyes_Diego_Alejandro_Rosero_Trochez.pdf"},
-  "1002950105":{nombre:"SANCHEZ PACUE YERSI LILIANA",notas:[2.4],acumulados:[2.16],asistencia:0.5,definitiva:2.7,observacion:"pdfs/02_Yersi_Illiana_Sanchez_Pacue_Carolina_Montenegro_Achinte.pdf"},
-  "1004249724":{nombre:"TOLEDO PINTO JONIER",notas:[3.1],acumulados:[2.79],asistencia:0.5,definitiva:3.3,observacion:"pdfs/08_Wilson_Gomez_Javier_Toledo.pdf"},
-  "1061432838":{nombre:"YATACUE DAGUA ALAN JHONIER",notas:[3.2],acumulados:[2.88],asistencia:0.3,definitiva:3.2,observacion:"pdfs/05_Germain_Polo_Alan_Yatacue.pdf"},
-  "1062082171":{nombre:"YOTENGO PACHONGO JOHAN SEBASTIAN",notas:[2.2],acumulados:[1.98],asistencia:0.5,definitiva:2.5,observacion:"pdfs/03_Daniel_Andres_Masamuel_Johan_Sebastian_Yotengo.pdf"}
+  "1150185516":{nombre:"CASTILLO ORDOÑEZ DAVID ALEJANDRO",notas:[1.0,3.3],acumulados:[0.10,2.64],asistencia:0.4,definitiva:3.1},
+  "1081277513":{nombre:"CLAVIJO REYES SANTIAGO ANDRES",notas:[1.0,3.4],acumulados:[0.10,2.72],asistencia:0.4,definitiva:3.2},
+  "1085660280":{nombre:"DURAN RODRIGUEZ JHONIER ALFREDO",notas:[5.0,2.0],acumulados:[0.50,1.60],asistencia:0.1,definitiva:2.2},
+  "1061686954":{nombre:"GOMEZ RUIZ WILSON ALEJANDRO",notas:[1.0,3.1],acumulados:[0.10,2.48],asistencia:0.4,definitiva:3.0},
+  "1060870506":{nombre:"GUAMPE LLANTEN JULIAN DAVID",notas:[1.0,2.7],acumulados:[0.10,2.16],asistencia:0.4,definitiva:2.7},
+  "1058549207":{nombre:"MASABUEL VALENCIA DANIEL ANDRES",notas:[5.0,2.5],acumulados:[0.50,2.00],asistencia:0.5,definitiva:3.0},
+  "1029602345":{nombre:"MONTENEGRO ACHINTE JINETH CAROLINA",notas:[5.0,2.4],acumulados:[0.50,1.92],asistencia:0.4,definitiva:2.8},
+  "1059474502":{nombre:"MUÑOZ JIMENEZ JUAN DIEGO",notas:[1.0,3.4],acumulados:[0.10,2.68],asistencia:0.2,definitiva:3.0},
+  "1063434525":{nombre:"ORDOÑEZ ANACONA MAIKOL GABRIEL",notas:[1.0,1.0],acumulados:[0.10,0.80],asistencia:0.3,definitiva:1.2},
+  "1062078697":{nombre:"OSSA ROGER ALEXIS",notas:[1.0,1.0],acumulados:[0.10,0.80],asistencia:0.1,definitiva:1.0},
+  "1058933403":{nombre:"POLO MOLINA GERMAN ESTEBAN",notas:[5.0,4.0],acumulados:[0.50,3.20],asistencia:0.5,definitiva:4.2},
+  "1025530060":{nombre:"RAIGOSA PIÑEROS ADRIAN SANTIAGO",notas:[1.0,2.7],acumulados:[0.10,2.16],asistencia:0.3,definitiva:2.6},
+  "1061710558":{nombre:"ROSERO TROCHEZ DIEGO ALEJANDRO",notas:[1.0,3.4],acumulados:[0.10,2.72],asistencia:0.4,definitiva:3.2},
+  "1002950105":{nombre:"SANCHEZ PACUE YERSLI LUANA",notas:[5.0,2.4],acumulados:[0.50,1.92],asistencia:0.5,definitiva:2.9},
+  "1004249724":{nombre:"TOLEDO PINTO JONIER",notas:[5.0,3.1],acumulados:[0.50,2.48],asistencia:0.5,definitiva:3.5},
+  "1061432838":{nombre:"YATACUE DAGUA ALAN JHONIER",notas:[5.0,4.0],acumulados:[0.50,3.20],asistencia:0.3,definitiva:4.0},
+  "1062082171":{nombre:"YOTENGO PACHONGO JOHAN SEBASTIAN",notas:[5.0,2.2],acumulados:[0.50,1.76],asistencia:0.5,definitiva:2.8}
 };
 
 const $=id=>document.getElementById(id);
-const fmt=n=>Number(n).toLocaleString('es-CO',{minimumFractionDigits:1,maximumFractionDigits:1});
+const fmt=n=>Number(n).toLocaleString('es-CO',{minimumFractionDigits:1,maximumFractionDigits:2});
 const fmtId=id=>id.replace(/\B(?=(\d{3})+(?!\d))/g,'.');
 const faltasPorAcumulado={"0.5":0,"0.4":1,"0.3":2,"0.2":3,"0.1":4,"0.0":5};
 function iniciar(){document.title=`Consulta de notas — ${CONFIG.asignatura}`;$('logo').src=CONFIG.logo;$('titulo').textContent=CONFIG.titulo;$('periodo').textContent=CONFIG.periodo;$('asignatura').textContent=CONFIG.asignatura;$('programa').textContent=CONFIG.programa;$('docente').textContent=CONFIG.docente}
@@ -95,15 +95,7 @@ $('formulario').addEventListener('submit',e=>{e.preventDefault();const id=$('doc
   $('idSalida').textContent=fmtId(id);$('nombreSalida').textContent=d.nombre;$('programaSalida').textContent=CONFIG.codigoPrograma;$('filas').replaceChildren();
   CONFIG.actividades.forEach((a,i)=>$('filas').appendChild(fila([a.nombre,fmt(d.notas[i]),`${fmt(a.porcentaje)}%`,fmt(d.acumulados[i])])));
   $('filas').appendChild(fila(['Faltas',String(faltasPorAcumulado[Number(d.asistencia).toFixed(1)]),'10%',fmt(d.asistencia)]));
-  $('definitiva').textContent=fmt(d.definitiva);$('definitiva').classList.toggle('perdida',d.definitiva<3);
-  const retro=$('retroalimentacion');retro.replaceChildren();
-  if(d.observacion){
-    retro.append('Consulta aquí la retroalimentación del ejercicio final: ');
-    const enlace=document.createElement('a');enlace.href=d.observacion;enlace.target='_blank';enlace.rel='noopener noreferrer';enlace.textContent='AQUI';retro.appendChild(enlace);
-  }else{
-    retro.textContent='Estudiantes que no presentaron el parcial del primer corte del periodo 2026-II';
-  }
-  $('resultado').style.display='block'
+  $('definitiva').textContent=fmt(d.definitiva);$('definitiva').classList.toggle('perdida',d.definitiva<3);$('resultado').style.display='block'
 });
 $('limpiar').addEventListener('click',()=>{$('documento').value='';ocultar();$('documento').focus()});
 iniciar();
